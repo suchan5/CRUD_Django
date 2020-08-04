@@ -16,6 +16,7 @@ class Author(models.Model):
     first_Name = models.CharField(blank=False, max_length=50)
     last_Name = models.CharField(blank=False, max_length=50)
     date_of_birth = models.IntegerField(blank=False)
+    # 'models.DataField(blank=False)'로 할 껄
 
     def __str__(self):
-        return self.first_Name
+        return self.first_Name + " " + self.last_Name

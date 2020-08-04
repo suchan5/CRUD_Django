@@ -22,6 +22,7 @@ import forum.views
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('books/', books.views.index),  # view.py에서 'index()' 을 가져온거임.
+    path('books/all', books.views.show_books),
     path('reviews/', reviews.views.index),
     path('forum/', forum.views.index)
 ]

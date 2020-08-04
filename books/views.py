@@ -1,4 +1,5 @@
 from django.shortcuts import render, HttpResponse
+from .models import Book
 
 # Create your views here.
 # A View (in other words, a view function) refers to a function.
@@ -19,4 +20,12 @@ def index(request):
     return render(request, 'books/index.template.html', {
         'first_name': fname,
         'last_name': lname
+    })
+
+
+def show_books(request):
+    # SELECT * FROM books;
+    all_books = Book.objects.all()  # this 'Book' is our model from 'models.py' power of ORM(Obect Relation Model). 맨 위에도 import해주삼
+    return render(request, 'books/all_books.template.html', {
+        'books': all_books
     })
