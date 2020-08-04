@@ -40,18 +40,22 @@ def show_authors(request):
 
 
 def create_book(request):
-    # check if we are submitting the form
     if request.method == "POST":
         print(request.POST)
 
         # create the BookForm by filling it with data from the users' submission
         create_form = BookForm(request.POST)
-        # create a model based on the data in the form
-        create_form.save()
-        return redirect(reverse(show_books))
 
+        if create_form.is_valid():
+            # create a model based on the data in the form
+            create_form.save()
+            return redirect(reverse(show_books))
+        else:
+            return render(request, 'books/create_book.template.html', {
+                'form': create_form
+            })
     else:
-        create_form = BookForm()
+        create_form = BookForm()  
         return render(request, 'books/create_book.template.html', {
             'form': create_form
         })
