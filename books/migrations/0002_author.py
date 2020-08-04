@@ -16,7 +16,7 @@ class Migration(migrations.Migration):
                 ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
                 ('first_Name', models.CharField(max_length=50)),
                 ('last_Name', models.CharField(max_length=50)),
-                ('date_of_birth', models.IntegerField()),
+                ('dob', models.DateField()),
             ],
         ),
     ]

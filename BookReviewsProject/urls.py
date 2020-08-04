@@ -17,9 +17,11 @@ from django.contrib import admin
 from django.urls import path
 import books.views  # 요것도 해줘야함
 import reviews.views
+import forum.views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('books/', books.views.index),  # view.py에서 'index()' 을 가져온거임.
-    path('reviews/', reviews.views.index)
+    path('reviews/', reviews.views.index),
+    path('forum/', forum.views.index)
 ]
