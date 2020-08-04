@@ -1,5 +1,6 @@
-from django.shortcuts import render, HttpResponse
-from .models import Book
+from django.shortcuts import render, HttpResponse, redirect, reverse
+from .models import Book, Author
+from .forms import BookForm  # class name from 'forms.py'
 
 # Create your views here.
 # A View (in other words, a view function) refers to a function.
@@ -25,7 +26,32 @@ def index(request):
 
 def show_books(request):
     # SELECT * FROM books;
-    all_books = Book.objects.all()  # this 'Book' is our model from 'models.py' power of ORM(Obect Relation Model). 맨 위에도 import해주삼
+    all_books = Book.objects.all()  # 맨 위에도 import해주삼. this 'Book' is our model from 'models.py' power of ORM(Obect Relation Model).
     return render(request, 'books/all_books.template.html', {
         'books': all_books
     })
+
+
+def show_authors(request):
+    all_authors = Author.objects.all()  # 맨 위에도 import 잊지마삼
+    return render(request, 'books/all_authors.template.html', {
+        'authors': all_authors
+    })
+
+
+def create_book(request):
+    # check if we are submitting the form
+    if request.method == "POST":
+        print(request.POST)
+
+        # create the BookForm by filling it with data from the users' submission
+        create_form = BookForm(request.POST)
+        # create a model based on the data in the form
+        create_form.save()
+        return redirect(reverse(show_books))
+
+    else:
+        create_form = BookForm()
+        return render(request, 'books/create_book.template.html', {
+            'form': create_form
+        })

@@ -6,11 +6,12 @@
     <title>Document</title>
 </head>
 <body>
-    <p>All books!</p>
-    <ul>
-        {% for b in books %}
-            <li>{{b.title}}</li>
-        {% endfor %}
-    </ul>
+    <h1>Create Book!</h1>
+    <form method="POST">
+        {% csrf_token %}
+        {{ form.as_p}}
+
+        <input type="Submit"/>
+    </form>
 </body>
 </html>

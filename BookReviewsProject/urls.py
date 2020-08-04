@@ -15,14 +15,16 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-import books.views  # 요것도 해줘야함
-import reviews.views
-import forum.views
+import books.views  # 각 app들에 요것도 해줘야함
+import reviews.views  # 각 app들에 요것도 해줘야함
+import forum.views  # 각 app들에 요것도 해줘야함
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('books/', books.views.index),  # view.py에서 'index()' 을 가져온거임.
     path('books/all', books.views.show_books),
+    path('authors/', books.views.show_authors),
+    path('books/create', books.views.create_book),
     path('reviews/', reviews.views.index),
     path('forum/', forum.views.index)
 ]

@@ -6,10 +6,12 @@
     <title>Document</title>
 </head>
 <body>
-    <p>All books!</p>
+    <p>These are all authors availble!</p>
     <ul>
-        {% for b in books %}
-            <li>{{b.title}}</li>
+        {% for a in authors %}
+            <li>
+            {{a.first_Name}} {{a.last_Name}}
+            </li>
         {% endfor %}
     </ul>
 </body>
