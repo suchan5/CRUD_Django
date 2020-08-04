@@ -1,6 +1,6 @@
 from django.shortcuts import render, HttpResponse, redirect, reverse
 from .models import Book, Author
-from .forms import BookForm  # class name from 'forms.py'
+from .forms import BookForm, AuthorForm  # class name from 'forms.py'
 
 # Create your views here.
 # A View (in other words, a view function) refers to a function.
@@ -55,7 +55,42 @@ def create_book(request):
                 'form': create_form
             })
     else:
-        create_form = BookForm()  
+        create_form = BookForm()
         return render(request, 'books/create_book.template.html', {
             'form': create_form
         })
+
+
+def create_author(request):
+    if request.method == "POST":
+        print(request.POST)
+
+        create_form = AuthorForm(request.POST)
+
+        if create_form.is_valid():
+            create_form.save()
+            return redirect(reverse(show_authors))
+        else:
+            return render(request, 'books/create_author.template.html', {
+                'form': create_form
+            })
+    else:
+        create_form = AuthorForm()
+        return render(request, 'books/create_author.template.html', {
+            'form': create_form
+        })
+
+
+
+
+
+
+
+
+
+
+
+    create_form = AuthorForm()
+    return render(request, 'books/create_author.template.html', {
+        'form': create_form
+    })
