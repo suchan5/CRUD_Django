@@ -6,13 +6,12 @@
     <title>Document</title>
 </head>
 <body>
-    <!--{{book.title}}에서 book은 view.py에서 넘겨받은 variable이고 title은 models.py(데이터베이스)에서 넘겨받은거임 -->
-    <h1>Edit Book: {{book.title}}</h1>
+    <!--이거 first_Name, last_Name is from models.py(our database. 그런데 code not working...sth is wrong..-->
+    <h1>Edit Author: {{author.first_Name}} {{author.last_Name}}</h1>
     <form method="POST">
         {% csrf_token %}
         {{ form.as_p}}
         <input type="submit"/>
     </form>
- 
 </body>
 </html>

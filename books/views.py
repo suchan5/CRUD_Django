@@ -81,7 +81,7 @@ def create_author(request):
         })
 
 
-def update_book(request, book_id):
+def update_book(request, book_id): 
     # retrieve data from object(Book model we created) first
     book_being_updated = get_object_or_404(Book, pk=book_id)
 
@@ -92,11 +92,38 @@ def update_book(request, book_id):
             return redirect(reverse(show_books))
         else:
             return render(request, 'books/update_book.template.html', {
-                "form": book_form
+                "form": book_form,
+                "book": book_being_updated
+                #  요거를 넘겨줘야  template에서 {{author.last_Name}}이렇게 쓸 수 있다
             })
     else:
         # create a form with the book details filled in
         book_form = BookForm(instance=book_being_updated)
         return render(request, 'books/update_book.template.html', {
-            "form": book_form
+            "form": book_form,
+            "book": book_being_updated
+        })
+
+
+def update_author(request, author_id):
+    # retrieve data from object(Author model we created) first
+    author_being_updated = get_object_or_404(Author, pk=author_id)
+
+    if request.method == "POST":
+        author_form = AuthorForm(request.POST, instance=author_being_updated)
+        if author_form.is_valid():
+            author_form.save()
+            return redirect(reverse(show_authors))
+        else:
+            return render(request, 'books/update_author.template.html', {
+                "form": author_form,
+                "author": author_being_updated
+                #  요거를 넘겨줘야  template에서 {{author.last_Name}}이렇게 쓸 수 있다
+            })
+    else:
+        # create a form with the book details filled in
+        author_form = AuthorForm(instance=author_being_updated)
+        return render(request, 'books/update_author.template.html', {
+            "form": author_form,
+            "author": author_being_updated
         })

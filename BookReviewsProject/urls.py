@@ -28,6 +28,8 @@ urlpatterns = [
          name='update_book_route'),
     path('authors/', books.views.show_authors),
     path('authors/create', books.views.create_author),
+    path('authors/update/<author_id>', books.views.update_author,
+         name='update_author_route'),
     path('reviews/', reviews.views.index),
     path('forum/', forum.views.index)
 ]

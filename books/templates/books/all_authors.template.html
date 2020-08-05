@@ -11,6 +11,7 @@
         {% for a in authors %}
             <li>
             {{a.first_Name}} {{a.last_Name}}
+            <a class="btn btn-primary btn-sm" href="{% url 'update_author_route' author_id=a.id %}">Edit</a>
             </li>
         {% endfor %}
     </ul>
