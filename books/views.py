@@ -1,6 +1,8 @@
 from django.shortcuts import render, HttpResponse, redirect, reverse, get_object_or_404
+from django.contrib.auth.decorators import login_required, permission_required 
 from .models import Book, Author
 from .forms import BookForm, AuthorForm  # class name from 'forms.py'
+
 
 # Create your views here.
 # A View (in other words, a view function) refers to a function.
@@ -38,7 +40,8 @@ def show_authors(request):
         'authors': all_authors
     })
 
-
+ 
+@login_required
 def create_book(request):
     if request.method == "POST":
         print(request.POST)

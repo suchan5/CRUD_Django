@@ -14,13 +14,14 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path
+from django.urls import path, include
 import books.views  # 각 app들에 요것도 해줘야함
 import reviews.views  # 각 app들에 요것도 해줘야함
 import forum.views  # 각 app들에 요것도 해줘야함
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('accounts/', include('allauth.urls')),
     path('books/', books.views.index),  # view.py에서 'index()' 을 가져온거임.
     path('books/all', books.views.show_books,
          name="all_books_route"),
