@@ -127,3 +127,16 @@ def update_author(request, author_id):
             "form": author_form,
             "author": author_being_updated
         })
+
+
+def delete_book(request, book_id):
+    book_to_delete = get_object_or_404(Book, pk=book_id)
+
+    if request.method == 'POST':
+        book_to_delete.delete()
+        return redirect(reverse(show_books))
+
+    else:
+        return render(request, 'books/confirm_delete_book.template.html', {
+            "book": book_to_delete
+        })
