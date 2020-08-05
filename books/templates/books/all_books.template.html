@@ -9,7 +9,10 @@
     <p>All books!</p>
     <ul>
         {% for b in books %}
-            <li>{{b.title}}</li>
+            <li>
+                {{b.title}}
+                <a class="btn btn-primary btn-sm" href="{% url 'update_book_route' book_id=b.id %}">Edit</a>
+            </li>
         {% endfor %}
     </ul>
 </body>

@@ -24,6 +24,8 @@ urlpatterns = [
     path('books/', books.views.index),  # view.py에서 'index()' 을 가져온거임.
     path('books/all', books.views.show_books),
     path('books/create', books.views.create_book),
+    path('books/update/<book_id>', books.views.update_book,
+         name='update_book_route'),
     path('authors/', books.views.show_authors),
     path('authors/create', books.views.create_author),
     path('reviews/', reviews.views.index),
