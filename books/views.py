@@ -140,3 +140,16 @@ def delete_book(request, book_id):
         return render(request, 'books/confirm_delete_book.template.html', {
             "book": book_to_delete
         })
+
+
+def delete_author(request, author_id):
+    author_to_delete = get_object_or_404(Author, pk=author_id)
+
+    if request.method == 'POST':
+        author_to_delete.delete()
+        return redirect(reverse(show_authors))
+    else:
+        return render(request, 'books/confirm_delete_author.template.html', {
+            "author": author_to_delete
+        })
+
