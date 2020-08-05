@@ -1,5 +1,6 @@
 from django.shortcuts import render, HttpResponse, redirect, reverse, get_object_or_404
-from django.contrib.auth.decorators import login_required, permission_required 
+from django.contrib import messages
+from django.contrib.auth.decorators import login_required, permission_required
 from .models import Book, Author
 from .forms import BookForm, AuthorForm  # class name from 'forms.py'
 
@@ -28,7 +29,8 @@ def index(request):
 
 def show_books(request):
     # SELECT * FROM books;
-    all_books = Book.objects.all()  # 맨 위에도 import해주삼. this 'Book' is our model from 'models.py' power of ORM(Obect Relation Model).
+    # 맨 위에도 import해주삼. this 'Book' is our model from 'models.py' power of ORM(Obect Relation Model).
+    all_books = Book.objects.all()
     return render(request, 'books/all_books.template.html', {
         'books': all_books
     })
@@ -40,7 +42,7 @@ def show_authors(request):
         'authors': all_authors
     })
 
- 
+
 @login_required
 def create_book(request):
     if request.method == "POST":
@@ -52,6 +54,7 @@ def create_book(request):
         if create_form.is_valid():
             # create a model based on the data in the form
             create_form.save()
+            messages.success(request, "New book has been created")
             return redirect(reverse(show_books))
         else:
             return render(request, 'books/create_book.template.html', {
@@ -84,7 +87,7 @@ def create_author(request):
         })
 
 
-def update_book(request, book_id): 
+def update_book(request, book_id):
     # retrieve data from object(Book model we created) first
     book_being_updated = get_object_or_404(Book, pk=book_id)
 
@@ -155,4 +158,3 @@ def delete_author(request, author_id):
         return render(request, 'books/confirm_delete_author.template.html', {
             "author": author_to_delete
         })
-
