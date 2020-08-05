@@ -1,16 +1,10 @@
+{% extends 'base.template.html' %}
 {%load static %}
 
-<!DOCTYPE html>
-<html lang="en">
 
-<head>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<link rel="stylesheet" href="{% static 'style.css' %}">
-	<title>Document</title>
-</head>
+{%block title%}어서오세요 책방에{%endblock%}
 
-<body> 
+{%block content%}
 	{% if request.user.is_authenticated  %}
 	<p>Welcome {{request.user}}!!!!</p>
 	{% else %}
@@ -20,6 +14,4 @@
 	<h1> Welcome to bookreview</h1>
 	<p>Long time no see, {{first_name}} {{last_name}}</p>
 	<img src="{% static 'harry potter.jpeg'%}"/>
-</body>
-
-</html>
+{%endblock %}
